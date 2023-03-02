@@ -1,10 +1,9 @@
 package com.example.onlineauctionsellingecommerce.entity;
 import jakarta.persistence.*;
 import lombok.*;
-@Entity
+@Entity(name = "auction_product")
 @Data
-@Table(name = "auction_product")
-public class AuctionProduct {
+public class BidProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "auction_id")
