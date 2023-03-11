@@ -2,14 +2,11 @@ package com.example.onlineauctionsellingecommerce.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "item")
 @Data
-@ToString
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,14 +22,16 @@ public class Item {
     private String itemCondition;
     @Column(name = "item_price")
     private float itemPrice;
-    @Column(name = "item_category")
-    private String itemCategory;
-    @Column(name = "delivery_date")
-    private String deliveryDate;
-    @Column(name = "shipment_charges")
-    private float shipmentCharges;
     @ManyToOne
     @JoinColumn(name = "seller_id")
-    private Seller seller;
+    private Seller sellers;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category categories;
+    @OneToMany(mappedBy = "item")
+    private List<BidItem> sellerBidItem;
+    @OneToMany(mappedBy = "item")
+    private List<Order> orderItem;
+
 }
 

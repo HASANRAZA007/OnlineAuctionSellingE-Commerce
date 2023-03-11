@@ -1,10 +1,7 @@
 package com.example.onlineauctionsellingecommerce.entity;
 import jakarta.persistence.*;
 import lombok.Data;
-
-import java.util.ArrayList;
 import java.util.List;
-
 @Entity
 @Table(name = "seller")
 @Data
@@ -23,8 +20,12 @@ public class Seller {
     private String sellerEmail;
     @Column(name = "seller_number")
     private int sellerNumber;
-    @OneToMany(mappedBy = "seller")
-    private List<Item> items=new ArrayList<>();
-    @OneToMany(mappedBy = "seller")
-    private List<BidItem> bidOnSellerItems=new ArrayList<>();
+    @OneToMany(mappedBy = "sellers")
+    private List<Item> items;
+    @OneToMany(mappedBy = "sellers")
+    private List<BidItem> bidOnSellerItems;
+    @OneToMany(mappedBy = "sellers")
+    private List<Order> sellerOrder;
+    @OneToMany(mappedBy = "sellers")
+    private List<Payment> sellerPayments;
 }

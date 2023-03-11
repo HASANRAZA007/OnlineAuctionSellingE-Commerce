@@ -11,11 +11,15 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "payment_id")
     private long paymentId;
-    @Column(name = "buyer_id")
-    private long buyerId;
     @Column(name = "payment_status")
     private boolean paymentStatus;
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
+    @ManyToOne
+    @JoinColumn(name = "seller_id")
+    private Seller sellers;
+    @ManyToOne
+    @JoinColumn(name = "buyer_id")
+    private Buyer buyer;
 }

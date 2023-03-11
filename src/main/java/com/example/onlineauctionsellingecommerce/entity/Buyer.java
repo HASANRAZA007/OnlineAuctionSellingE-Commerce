@@ -27,5 +27,11 @@ public class Buyer {
     @Column(name = "buyer_number")
     private int buyerNumber;
     @OneToMany(mappedBy = "buyer")
-    private List<BidItem> buyerBidOnItem=new ArrayList<>();
+    private List<BidItem> buyerBidOnItem;
+    @OneToMany(mappedBy = "buyer")
+    private  List<Order> buyerBidItemOrder;
+    @OneToMany(mappedBy = "buyer")
+    private List<OrderDetail>  buyerOrderDetails;
+    @OneToMany(mappedBy = "buyer")
+    private List<Payment> buyerPayments;
 }

@@ -3,7 +3,6 @@ package com.example.onlineauctionsellingecommerce.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,24 +11,21 @@ import java.util.List;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
+    @Column(name = "id")
     private int orderId;
-    @Column(name = "bid_id")
-    private long bidId;
-    @Column(name = "seller_id")
-    private long sellerId;
-    @Column(name = "buyer_id")
-    private long buyerId;
-    @Column(name = "item_id")
-    private long itemId;
-    @Column(name = "order_date")
-    private Date orderDate;
-    @Column(name = "order_quantity")
-    private int OrderQuantity;
-    @Column(name = "total_amount")
-    private float totalAmount;
-    @Column(name = "payment_method")
-    private String paymentMethod;
+    @Column(name = "order_amount")
+    private Date orderAmount;
     @OneToMany(mappedBy = "order")
-    private List<Payment> orderPayment=new ArrayList<>();
+    private List<Payment> orderPayment;
+    @ManyToOne
+    @JoinColumn(name = "seller_id")
+    private Seller sellers;
+    @ManyToOne
+    @JoinColumn(name = "buyer_id")
+    private Buyer buyer;
+    @ManyToOne
+    @JoinColumn(name = "item_id")
+    private Item item;
+    @OneToMany(mappedBy = "orders")
+    private List<OrderDetail> orderDetails;
 }
