@@ -1,8 +1,8 @@
 package com.example.onlineauctionsellingecommerce.entity;
-
 import jakarta.persistence.*;
 import lombok.Data;
-import java.sql.Date;
+
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -12,20 +12,24 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int orderId;
-    @Column(name = "order_amount")
-    private Date orderAmount;
-    @OneToMany(mappedBy = "order")
-    private List<Payment> orderPayment;
-    @ManyToOne
-    @JoinColumn(name = "seller_id")
-    private Seller sellers;
-    @ManyToOne
-    @JoinColumn(name = "buyer_id")
-    private Buyer buyer;
+    private Long id;
+    @Column(name = "quantity")
+    private int quantity;
+    @Column(name = "date")
+    private Date date;
+    @Column(name = "shipping_address")
+    private String shippingAddress;
+    @Column(name = "amount")
+    private Float amount;
+    @Column(name = "payment_method")
+    private String paymentMethod;
     @ManyToOne
     @JoinColumn(name = "item_id")
     private Item item;
-    @OneToMany(mappedBy = "orders")
-    private List<OrderDetail> orderDetails;
+    @OneToOne(mappedBy = "order")
+    private Payment payment;
+    @ManyToOne
+    @JoinColumn(name = "user_role_id")
+    private UserRole userRole;
+
 }

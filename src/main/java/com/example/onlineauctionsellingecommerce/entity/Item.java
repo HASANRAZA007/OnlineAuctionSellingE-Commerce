@@ -1,7 +1,8 @@
 package com.example.onlineauctionsellingecommerce.entity;
+
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.ToString;
+
 import java.util.List;
 
 @Entity
@@ -10,28 +11,24 @@ import java.util.List;
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "item_id")
-    private long itemId;
-    @Column(name = "item_title")
-    private String itemTitle;
-    @Column(name = "item_name")
-    private String itemName;
-    @Column(name = "item_description")
-    private String itemDescription;
-    @Column(name = "item_condition")
-    private String itemCondition;
-    @Column(name = "item_price")
-    private float itemPrice;
-    @ManyToOne
-    @JoinColumn(name = "seller_id")
-    private Seller sellers;
+    @Column(name = "id")
+    private Long id;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "code")
+    private Long code;
+    @Column(name = "description")
+    private String description;
+    @Column(name = "price")
+    private String price;
     @ManyToOne
     @JoinColumn(name = "category_id")
-    private Category categories;
+    private Category category;
+    @ManyToOne
+    @JoinColumn(name = "user_role_id")
+    private UserRole userRole;
     @OneToMany(mappedBy = "item")
-    private List<BidItem> sellerBidItem;
+    private List<Order> orderItemList;
     @OneToMany(mappedBy = "item")
-    private List<Order> orderItem;
-
+    private List<BidItem> bidItemList;
 }
-

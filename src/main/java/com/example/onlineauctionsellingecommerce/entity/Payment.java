@@ -4,22 +4,19 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "payments")
+@Table(name = "payment")
 @Data
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "payment_id")
-    private long paymentId;
+    @Column(name = "id")
+    private Long id;
     @Column(name = "payment_status")
-    private boolean paymentStatus;
-    @ManyToOne
+    private boolean Status;
+    @OneToOne
     @JoinColumn(name = "order_id")
     private Order order;
     @ManyToOne
-    @JoinColumn(name = "seller_id")
-    private Seller sellers;
-    @ManyToOne
-    @JoinColumn(name = "buyer_id")
-    private Buyer buyer;
+    @JoinColumn(name = "user_role_id")
+    private UserRole userRole;
 }

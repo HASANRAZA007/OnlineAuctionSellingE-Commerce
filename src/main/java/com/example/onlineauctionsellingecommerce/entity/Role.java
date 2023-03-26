@@ -1,22 +1,21 @@
 package com.example.onlineauctionsellingecommerce.entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
 
 @Entity
-@Table(name = "category")
+@Table(name = "role")
 @Data
-public class Category {
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "name")
-    private String name;
-    @OneToMany(mappedBy = "category")
-    private List<Item> itemList;
-    @ManyToOne
-    @JoinColumn(name = "user_role_id")
-    private UserRole userRole;
+    @Column(name = "user_role", unique = true)
+    private String role;
+    @OneToMany(mappedBy = "role")
+    private List<UserRole> roleList;
 }
