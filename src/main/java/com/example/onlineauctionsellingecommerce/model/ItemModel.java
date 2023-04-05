@@ -1,16 +1,20 @@
 package com.example.onlineauctionsellingecommerce.model;
 import com.example.onlineauctionsellingecommerce.entity.Category;
 import com.example.onlineauctionsellingecommerce.entity.Item;
+import com.example.onlineauctionsellingecommerce.entity.UserRole;
 import lombok.Data;
 
 @Data
 public class ItemModel {
     private Long id;
     private String name;
-    private Long code;
+    private String code;
     private String description;
-    private String price;
+    private Float price;
     private Category category;
+    private UserRole userRole;
+    private String email;
+    private String role;
 
     public Item disassemble(){
         Item item=new Item();
@@ -19,6 +23,7 @@ public class ItemModel {
         item.setDescription(description);
         item.setPrice(price);
         item.setCategory(category);
+        item.setUserRole(userRole);
         return item;
     }
     public ItemModel assemble(Item item){
@@ -28,6 +33,8 @@ public class ItemModel {
         itemModel.setCode(item.getCode());
         itemModel.setDescription(item.getDescription());
         itemModel.setCategory(item.getCategory());
+        itemModel.setUserRole(item.getUserRole());
         return itemModel;
+
     }
 }

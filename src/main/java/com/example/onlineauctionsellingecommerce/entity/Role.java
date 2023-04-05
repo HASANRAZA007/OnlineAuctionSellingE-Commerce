@@ -1,10 +1,7 @@
 package com.example.onlineauctionsellingecommerce.entity;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
-
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "role")
@@ -14,8 +11,8 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "user_role", unique = true)
-    private String role;
+    @Column(name = "role_name")
+    private String roleName;
     @OneToMany(mappedBy = "role")
-    private List<UserRole> roleList;
+    private Set<UserRole> userRoleList;
 }

@@ -10,6 +10,7 @@ public class UserModel {
     private String password;
     private Long mobileNumber;
     private String email;
+    private String role;
 
     public User disassemble(){
         User user=new User();

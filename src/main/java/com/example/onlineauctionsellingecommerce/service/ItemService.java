@@ -1,33 +1,35 @@
 package com.example.onlineauctionsellingecommerce.service;
+
 import com.example.onlineauctionsellingecommerce.entity.Item;
+import com.example.onlineauctionsellingecommerce.entity.UserRole;
 import com.example.onlineauctionsellingecommerce.model.ItemModel;
 import com.example.onlineauctionsellingecommerce.repository.ItemRepository;
+import com.example.onlineauctionsellingecommerce.repository.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
-
 @Service
 public class ItemService {
     @Autowired
-    private ItemRepository itemRepository;
+    private  ItemRepository itemRepository;
+    @Autowired
+    private  UserRoleRepository userRoleRepository;
 
-    public ItemModel saveItem(ItemModel itemModel) {
-        Item item = null;
-        if (!ObjectUtils.isEmpty(itemModel))
-            item = findbyCode(itemModel);
-        if (ObjectUtils.isEmpty(item)) {
-            item = itemModel.disassemble();
+    public String saveItem(ItemModel itemModel) {
+        String status;
+        String modelEmail = itemModel.getEmail();
+        UserRole userRole = userRoleRepository.findUserRoleByUser_Email(modelEmail);
+        String itemModelCode = itemModel.getCode();
+        Item isCodeExist = itemRepository.findByCode(itemModelCode);
+        if (userRole != null && userRole.getRole().getRoleName().equalsIgnoreCase("seller")) {
+            if (isCodeExist != null) {
+                status = "Item is already Exist.";
+            } else {
+                itemModel.assemble(itemRepository.save(itemModel.disassemble()));
+                status = "Item Successfully Saved.";
+            }
         } else {
-            item.setCode(itemModel.getCode());
+            status = "You have not Permission to List Item";
         }
-        return itemModel.assemble(itemRepository.save(item));
-    }
-
-    public Item findbyCode(ItemModel itemModel) {
-        Item item = null;
-        if (!ObjectUtils.isEmpty(itemModel.getCode())) {
-            item = itemRepository.findByCode(item.getCode());
-        }
-        return item;
+        return status;
     }
 }

@@ -16,11 +16,11 @@ public class Item {
     @Column(name = "name")
     private String name;
     @Column(name = "code")
-    private Long code;
+    private String code;
     @Column(name = "description")
     private String description;
     @Column(name = "price")
-    private String price;
+    private Float price;
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;

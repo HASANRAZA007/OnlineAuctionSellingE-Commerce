@@ -12,8 +12,8 @@ public class BidItem {
     private Long id;
     @Column(name = "bid_time")
     private java.time.LocalDateTime time;
-    @Column(name = "max_bid_price")
-    private Long maxBidPrice;
+    @Column(name = "bid_price")
+    private Float bidPrice;
     @ManyToOne
     @JoinColumn(name = "user_role_id")
     private UserRole userRole;
