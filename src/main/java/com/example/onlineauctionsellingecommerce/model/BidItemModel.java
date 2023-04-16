@@ -2,31 +2,33 @@ package com.example.onlineauctionsellingecommerce.model;
 
 import com.example.onlineauctionsellingecommerce.entity.BidItem;
 import com.example.onlineauctionsellingecommerce.entity.Item;
-import com.example.onlineauctionsellingecommerce.entity.UserRole;
+import com.example.onlineauctionsellingecommerce.entity.User;
 import jakarta.annotation.Nullable;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Component
 @Data
+@NoArgsConstructor
 public class BidItemModel {
     private  Long id;
     @Nullable
     private LocalDateTime time;
     private Float bidPrice;
-    private UserRole userRole;
     private String email;
+    private User user;
+    private String roleName;
     private Item item;
 
     public BidItem disassemble(){
         BidItem bidItem=new BidItem();
-        bidItem.setTime(LocalDateTime.now());
+        bidItem.setTime(LocalDateTime.parse(LocalDateTime.now().toString()));
         bidItem.setBidPrice(bidPrice);
         bidItem.setItem(item);
-        bidItem.setUserRole(userRole);
+        bidItem.setUser(user);
         return bidItem;
     }
     public BidItemModel assemble(BidItem bidItem){
@@ -34,7 +36,6 @@ public class BidItemModel {
         bidItemModel.setTime(bidItem.getTime());
         bidItemModel.setBidPrice(bidItem.getBidPrice());
         bidItemModel.setItem(bidItem.getItem());
-        bidItemModel.setUserRole(bidItem.getUserRole());
         return bidItemModel;
     }
 }

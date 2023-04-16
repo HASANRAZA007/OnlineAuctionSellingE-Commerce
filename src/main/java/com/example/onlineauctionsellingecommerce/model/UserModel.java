@@ -1,5 +1,4 @@
 package com.example.onlineauctionsellingecommerce.model;
-import com.example.onlineauctionsellingecommerce.entity.Role;
 import com.example.onlineauctionsellingecommerce.entity.User;
 import lombok.Data;
 

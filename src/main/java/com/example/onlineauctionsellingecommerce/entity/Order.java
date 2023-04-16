@@ -2,9 +2,6 @@ package com.example.onlineauctionsellingecommerce.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Date;
-import java.util.List;
-
 @Entity
 @Table(name = "order_item")
 @Data
@@ -13,10 +10,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "quantity")
-    private int quantity;
     @Column(name = "date")
-    private Date date;
+    private java.time.LocalDateTime date;
     @Column(name = "shipping_address")
     private String shippingAddress;
     @Column(name = "amount")
@@ -29,7 +24,7 @@ public class Order {
     @OneToOne(mappedBy = "order")
     private Payment payment;
     @ManyToOne
-    @JoinColumn(name = "user_role_id")
-    private UserRole userRole;
+    @JoinColumn(name = "buyer")
+    private User user;
 
 }

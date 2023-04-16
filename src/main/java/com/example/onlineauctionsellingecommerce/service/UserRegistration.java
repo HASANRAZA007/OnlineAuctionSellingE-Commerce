@@ -1,4 +1,5 @@
 package com.example.onlineauctionsellingecommerce.service;
+
 import com.example.onlineauctionsellingecommerce.entity.Role;
 import com.example.onlineauctionsellingecommerce.entity.User;
 import com.example.onlineauctionsellingecommerce.entity.UserRole;
@@ -12,27 +13,29 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserRegistration implements UserRegister {
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final UserRoleRepository userRoleRepository;
+
     @Autowired
-    private  UserRepository userRepository;
-    @Autowired
-    private  RoleRepository roleRepository;
-    @Autowired
-    private  UserRoleRepository userRoleRepository;
+    public UserRegistration(UserRepository userRepository, RoleRepository roleRepository, UserRoleRepository userRoleRepository) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.userRoleRepository = userRoleRepository;
+    }
 
     @Override
     public String saveUser(UserModel userModel) {
-        String result="";
-        String roleName="";
+        String result, roleName;
         Long userModelMobileNumber = userModel.getMobileNumber();
         User userExist = userRepository.findUserByMobileNumber(userModelMobileNumber);
         if (userExist != null) {
-           result= "User already exist with same Mobile Number!";
+            result = "User already exist with same Mobile Number!";
 
-        }
-        else {
+        } else {
             User user;
             new User();
-            roleName=userModel.getRole();
+            roleName = userModel.getRole();
             Role role = roleRepository.findByRoleName(roleName);
             role.setRoleName(roleName);
             roleRepository.save(role);
@@ -42,25 +45,26 @@ public class UserRegistration implements UserRegister {
             userRole.setUser(user);
             userRole.setRole(role);
             userRoleRepository.save(userRole);
-            result ="User saved successfully";
+            result = "User saved successfully";
         }
 
         return result;
     }
-    @Override
-    public String deleteUser(UserRole userRole){
-     return "User Successfully Deleted.";
-    }
-    @Override
-    public String userLogin(LoginModel loginModel){
-        String email= loginModel.getEmail();
-        String password=loginModel.getPassword();
-        User confirmDetail= userRepository.findByEmailAndPassword(email,password);
-        if (confirmDetail!=null)
-        {
-            return "You are Welcome!" ;
 
-        }else {
+    @Override
+    public String deleteUser(UserRole userRole) {
+        return "User Successfully Deleted.";
+    }
+
+    @Override
+    public String userLogin(LoginModel loginModel) {
+        String email = loginModel.getEmail();
+        String password = loginModel.getPassword();
+        User confirmDetail = userRepository.findByEmailAndPassword(email, password);
+        if (confirmDetail != null) {
+            return "You are Welcome!";
+
+        } else {
             return "User not Exist, Register Your Account.";
         }
     }

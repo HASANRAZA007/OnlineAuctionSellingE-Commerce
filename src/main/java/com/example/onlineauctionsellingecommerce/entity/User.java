@@ -22,4 +22,12 @@ public class User {
     private Long mobileNumber;
     @OneToMany(mappedBy = "user")
     private List<UserRole> userRoleList;
+    @OneToMany(mappedBy = "user")
+    private List<Item> itemList;
+    @OneToMany(mappedBy = "user")
+    private List<BidItem> bidItemList;
+    @OneToMany(mappedBy = "user")
+    private List<Order> orderList;
+    @OneToMany(mappedBy = "user")
+    private List<Payment> paymentList;
 }

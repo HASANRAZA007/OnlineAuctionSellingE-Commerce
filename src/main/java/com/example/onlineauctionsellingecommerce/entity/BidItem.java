@@ -12,11 +12,11 @@ public class BidItem {
     private Long id;
     @Column(name = "bid_time")
     private java.time.LocalDateTime time;
-    @Column(name = "bid_price")
+    @Column(name = "bid_price",nullable = false)
     private Float bidPrice;
     @ManyToOne
-    @JoinColumn(name = "user_role_id")
-    private UserRole userRole;
+    @JoinColumn(name = "bidder")
+    private User user;
     @ManyToOne
     @JoinColumn(name = "item_id")
     private Item item;

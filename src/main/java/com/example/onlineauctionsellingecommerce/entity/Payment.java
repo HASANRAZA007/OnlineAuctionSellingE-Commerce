@@ -17,6 +17,6 @@ public class Payment {
     @JoinColumn(name = "order_id")
     private Order order;
     @ManyToOne
-    @JoinColumn(name = "user_role_id")
-    private UserRole userRole;
+    @JoinColumn(name = "buyer")
+    private User user;
 }

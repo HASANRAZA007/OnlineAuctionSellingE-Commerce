@@ -1,13 +1,16 @@
 package com.example.onlineauctionsellingecommerce.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NonNull;
 
 import java.util.List;
 
 @Entity
 @Table(name = "item")
 @Data
+@NonNull
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +28,8 @@ public class Item {
     @JoinColumn(name = "category_id")
     private Category category;
     @ManyToOne
-    @JoinColumn(name = "user_role_id")
-    private UserRole userRole;
+    @JoinColumn(name = "seller")
+    private User user;
     @OneToMany(mappedBy = "item")
     private List<Order> orderItemList;
     @OneToMany(mappedBy = "item")

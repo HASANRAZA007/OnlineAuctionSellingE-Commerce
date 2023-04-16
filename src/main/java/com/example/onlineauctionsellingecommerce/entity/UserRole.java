@@ -19,14 +19,4 @@ public class UserRole {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private  Role role;
-    @OneToMany(mappedBy = "userRole")
-    private List<Item> sellerItemList;
-    @OneToMany(mappedBy = "userRole")
-    private List<BidItem> bidItemList;
-    @OneToMany(mappedBy = "userRole")
-    private List<Category> categoryList;
-    @OneToMany(mappedBy = "userRole")
-    private List<Order> userOrderList;
-    @OneToMany(mappedBy = "userRole")
-    private List<Payment> paymentList;
 }

@@ -1,4 +1,5 @@
 package com.example.onlineauctionsellingecommerce.entity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -12,11 +13,8 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "name")
+    @Column(name = "name",unique = true)
     private String name;
     @OneToMany(mappedBy = "category")
     private List<Item> itemList;
-    @ManyToOne
-    @JoinColumn(name = "user_role_id")
-    private UserRole userRole;
 }

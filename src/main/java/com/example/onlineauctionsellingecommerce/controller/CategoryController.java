@@ -7,19 +7,29 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping(path = "/category")
 public class CategoryController {
+    private final CategoryService categoryService;
     @Autowired
-    private CategoryService categoryService;
-    @PostMapping("add-category")
-    public String addCategory(@RequestBody CategoryModel categoryModel){
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
+
+    @PostMapping(path="/addCategory")
+    public CategoryModel addCategory(@RequestBody CategoryModel categoryModel){
          return categoryService.addCategory(categoryModel);
     }
-    @DeleteMapping("delete-category")
-    public void delete(@RequestParam String name){
-        categoryService.deleteCategory();
+    @GetMapping(path = "/getCategories")
+    public List<CategoryModel> getCategories(){
+        return categoryService.getCategories();
     }
-    @GetMapping("category-list")
-    public List<CategoryModel> getAll(){
-        return categoryService.findAllCategories();
+    @GetMapping(path = "/getCategoryByName/{categoryName}")
+    public CategoryModel getByName(@PathVariable(name = "categoryName") String name){
+        return categoryService.getCategoryByName(name);
     }
+    @PutMapping(path = "/updateCategory/{name}")
+    public CategoryModel update(@RequestBody CategoryModel categoryModel, @PathVariable(name = "name") String name){
+        return  categoryService.updateCategory(categoryModel,name);
+    }
+
 }
